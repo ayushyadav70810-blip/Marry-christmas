@@ -2,179 +2,143 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For Someone Special</title>
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Merry Christmas</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Quicksand', sans-serif;
+}
+
 body{
-margin:0;
-background:linear-gradient(#f7fbff,#eef6ff);
-font-family:'Poppins',sans-serif;
-overflow-x:hidden;
-text-align:center;
-color:#333;
+    background:#f3f9ff;
+    text-align:center;
+    overflow-x:hidden;
 }
 
-.page{display:none;min-height:100vh;padding:60px 20px;}
-.active{display:block;}
-
-h1,h2{font-family:'Great Vibes',cursive;}
-
-button{
-background:#6fa8ff;
-border:none;
-color:white;
-padding:14px 35px;
-border-radius:40px;
-font-size:18px;
-margin-top:25px;
-cursor:pointer;
-}
-
-.heart{
-font-size:100px;
-color:#ff6b6b;
-animation:pulse 1.5s infinite;
-}
-
-@keyframes pulse{
-0%{transform:scale(1);}
-50%{transform:scale(1.2);}
-100%{transform:scale(1);}
-}
-
-.gift{font-size:110px;cursor:pointer;}
-
-.card-grid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:20px;
-max-width:300px;
-margin:30px auto;
-}
-
-.flip-card{
-background:#dbe9ff;
-border-radius:20px;
-height:110px;
-display:flex;
-align-items:center;
-justify-content:center;
-font-weight:bold;
-cursor:pointer;
-box-shadow:0 8px 20px rgba(0,0,0,.1);
-}
-
-.photo{
-width:260px;
-border-radius:25px;
-box-shadow:0 10px 30px rgba(0,0,0,.15);
-}
-
-/* snow */
-.snowflake{
-position:fixed;
-top:-10px;
-color:#b5d8ff;
-font-size:14px;
-animation:fall linear infinite;
-opacity:0.8;
-pointer-events:none;
-z-index:5;
+/* Snow */
+.snow{
+    position:fixed;
+    top:-10px;
+    color:#bcdfff;
+    font-size:14px;
+    animation: fall linear infinite;
 }
 
 @keyframes fall{
-to{transform:translateY(110vh);}
+    to{ transform:translateY(110vh); }
 }
 
-/* santa & reindeer */
-.santa{
-position:fixed;
-bottom:10px;
-left:10px;
-width:90px;
-animation:float 3s ease-in-out infinite;
-z-index:6;
+/* Decorations */
+.decor{
+    position:fixed;
+    opacity:0.25;
 }
 
-.reindeer{
-position:fixed;
-top:10px;
-right:10px;
-width:110px;
-animation:float 3s ease-in-out infinite;
-z-index:6;
+.santa{ left:10px; bottom:40px; width:120px; }
+.leaf{ right:20px; top:120px; width:100px; }
+.bell{ left:30px; top:200px; width:90px; }
+
+/* Card */
+.card{
+    margin:100px auto;
+    width:300px;
+    height:400px;
+    perspective:1000px;
 }
 
-@keyframes float{
-0%,100%{transform:translateY(0);}
-50%{transform:translateY(-10px);}
+.card-inner{
+    width:100%;
+    height:100%;
+    position:relative;
+    transform-style:preserve-3d;
+    transition:0.8s;
+}
+
+.card.flip .card-inner{
+    transform:rotateY(180deg);
+}
+
+.face{
+    position:absolute;
+    width:100%;
+    height:100%;
+    backface-visibility:hidden;
+    border-radius:25px;
+    background:white;
+    box-shadow:0 10px 30px rgba(0,0,0,0.15);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.back{
+    transform:rotateY(180deg);
+}
+
+h1{ margin-bottom:10px; }
+.small{ font-size:14px; opacity:0.6; }
+
+img.mainpic{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:20px;
 }
 </style>
 </head>
 
 <body>
 
-<img src="https://i.imgur.com/QjGZ8G8.png" class="santa">
-<img src="https://i.imgur.com/6QKJp5C.png" class="reindeer">
+<!-- Decorations -->
+<img src="santa.png" class="decor santa">
+<img src="leaf.png" class="decor leaf">
+<img src="bell.png" class="decor bell">
 
-<!-- PAGE 1 -->
-<div class="page active" id="p1">
-<h2>For someone special</h2>
-<div class="heart">❤</div>
-<button onclick="next(2)">Tap Me</button>
+<!-- Card -->
+<div class="card" onclick="flip(this)">
+<div class="card-inner">
+
+<div class="face front">
+    <p class="small">click to flip ✨</p>
+    <img src="https://i.imgur.com/7yUvePI.png" class="mainpic">
 </div>
 
-<!-- PAGE 2 -->
-<div class="page" id="p2">
-<h2>This Christmas,<br>something special for you Chico 🤍</h2>
-<div class="gift" onclick="next(3)">🎁</div>
-<p>Tap the gift</p>
+<div class="face back">
+    <h1>Merry Christmas 🎄</h1>
+    <p class="small">to my favorite dumbest person!</p>
+    <br>
+    <p>
+    but that’s exactly why you’re so special to me heheh!<br><br>
+    Thank you for existing 🤍<br>
+    I’m really glad it’s you.
+    </p>
 </div>
 
-<!-- PAGE 3 -->
-<div class="page" id="p3">
-<h2>Just for you</h2>
-<p>I don’t need a Christmas gift because…</p>
-
-<div class="card-grid">
-<div class="flip-card" onclick="this.innerText='Because'">Click to flip</div>
-<div class="flip-card" onclick="this.innerText='You'">Click to flip</div>
-<div class="flip-card" onclick="this.innerText='Are'">Click to flip</div>
-<div class="flip-card" onclick="this.innerText='My'">Click to flip</div>
-<div class="flip-card" onclick="this.innerText='Gift 🤍'">Click to flip</div>
 </div>
-
-<button onclick="next(4)">Next</button>
-</div>
-
-<!-- PAGE 4 -->
-<div class="page" id="p4">
-<h1>Merry Christmas 🎄</h1>
-<img class="photo" src="IMG_3677.jpeg">
-<h2>to my favorite dumbest person!</h2>
-
-<p>
-but that’s exactly why you’re so special to me. heheh!<br><br>
-Thank you for existing 🤍<br>
-I’m really glad it’s you.
-</p>
 </div>
 
 <script>
-function next(n){
-document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-document.getElementById('p'+n).classList.add('active');
+function flip(card){
+    card.classList.toggle("flip");
 }
 
+// Snowflakes
 for(let i=0;i<40;i++){
-let s=document.createElement("div");
-s.className="snowflake";
-s.innerHTML="❄";
-s.style.left=Math.random()*100+"vw";
-s.style.animationDuration=5+Math.random()*10+"s";
-s.style.fontSize=10+Math.random()*14+"px";
-document.body.appendChild(s);
+    let s=document.createElement("div");
+    s.innerHTML="❄";
+    s.className="snow";
+    s.style.left=Math.random()*100+"vw";
+    s.style.animationDuration=5+Math.random()*5+"s";
+    s.style.fontSize=10+Math.random()*12+"px";
+    document.body.appendChild(s);
 }
 </script>
 
