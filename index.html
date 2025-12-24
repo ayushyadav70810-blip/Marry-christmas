@@ -37,31 +37,38 @@ margin-top:20px;
 .leaf{top:40%;left:-20px;width:90px;}
 
 .heart{font-size:90px;color:red;animation:pulse 1.3s infinite;}
-
-@keyframes pulse{
-0%{transform:scale(1);}
-50%{transform:scale(1.25);}
-100%{transform:scale(1);}
-}
+@keyframes pulse{0%{transform:scale(1);}50%{transform:scale(1.25);}100%{transform:scale(1);}}
 
 .card-row{display:flex;gap:10px;margin-top:20px;}
-.card{
-width:65px;height:95px;background:#ffb6c1;
-display:flex;align-items:center;justify-content:center;
-font-size:20px;border-radius:12px;
-transition:.6s;
+
+.card{width:70px;height:100px;perspective:1000px;}
+
+.card-inner{
+width:100%;height:100%;position:relative;
+transform-style:preserve-3d;transition:.8s;
 }
-.card.flipped{background:#fff;transform:rotateY(180deg);}
+
+.card.flipped .card-inner{transform:rotateY(180deg);}
+
+.card-front,.card-back{
+position:absolute;width:100%;height:100%;
+display:flex;align-items:center;justify-content:center;
+border-radius:14px;backface-visibility:hidden;font-weight:600;
+}
+
+.card-front{background:#ffe6f0;color:#ff5d8f;}
+.card-back{background:#fff;transform:rotateY(180deg);}
 
 .snowflake{
-position:fixed;
-top:-10px;
-font-size:14px;
-animation:snow 10s linear infinite;
-pointer-events:none;
+position:fixed;top:-10px;font-size:14px;
+animation:snow 10s linear infinite;pointer-events:none;
 }
+@keyframes snow{to{transform:translateY(110vh);} }
 
-@keyframes snow{to{transform:translateY(110vh);}}
+.final-photo{
+width:160px;border-radius:16px;margin-top:18px;
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
 </style>
 </head>
 
@@ -79,7 +86,7 @@ pointer-events:none;
 
 <div class="page" id="p2" style="display:none">
 <h2>This Christmas something special for you Chico 🎄</h2>
-<button onclick="next(3)">Open 🎁</button>
+<button onclick="next(3)">Open 💌</button>
 </div>
 
 <div class="page" id="p3" style="display:none">
@@ -87,11 +94,21 @@ pointer-events:none;
 <p>I don’t need a Christmas gift 🎀</p>
 
 <div class="card-row">
-<div class="card" onclick="flip(this)">Because</div>
-<div class="card" onclick="flip(this)">You</div>
-<div class="card" onclick="flip(this)">Are</div>
-<div class="card" onclick="flip(this)">My</div>
-<div class="card" onclick="flip(this)">Gift 🫶🏻</div>
+ <div class="card" onclick="flip(this)">
+  <div class="card-inner"><div class="card-front">Click ✨</div><div class="card-back">Because</div></div>
+ </div>
+ <div class="card" onclick="flip(this)">
+  <div class="card-inner"><div class="card-front">Click ✨</div><div class="card-back">You</div></div>
+ </div>
+ <div class="card" onclick="flip(this)">
+  <div class="card-inner"><div class="card-front">Click ✨</div><div class="card-back">Are</div></div>
+ </div>
+ <div class="card" onclick="flip(this)">
+  <div class="card-inner"><div class="card-front">Click ✨</div><div class="card-back">My</div></div>
+ </div>
+ <div class="card" onclick="flip(this)">
+  <div class="card-inner"><div class="card-front">Click ✨</div><div class="card-back">Gift 🫶</div></div>
+ </div>
 </div>
 
 <button onclick="next(4)">Next</button>
@@ -99,11 +116,11 @@ pointer-events:none;
 
 <div class="page" id="p4" style="display:none">
 <h2>Merry Christmas 🎅</h2>
+<img src="final.png" class="final-photo">
 <p style="margin-top:20px">
-To my favorite person 🤍  
-<br><br>
-Hey Chico,  
-this little page is only for you ✨  
+To my favorite person 🤍<br><br>
+Hey Chico,<br>
+this little page is only for you ✨<br>
 Always remember, you’re my favorite dumb person and that’s exactly why you’re so special to me hehe 🤍
 </p>
 </div>
@@ -114,18 +131,15 @@ document.querySelectorAll('.page').forEach(p=>p.style.display="none");
 document.getElementById("p"+n).style.display="flex";
 window.scrollTo(0,0);
 }
-
-function flip(c){
-c.classList.toggle("flipped");
-}
+function flip(c){c.classList.toggle("flipped");}
 
 for(let i=0;i<40;i++){
-let s=document.createElement("div");
-s.className="snowflake";
-s.style.left=Math.random()*100+"vw";
-s.style.animationDuration=5+Math.random()*6+"s";
-s.innerHTML="❄";
-document.body.appendChild(s);
+ let s=document.createElement("div");
+ s.className="snowflake";
+ s.style.left=Math.random()*100+"vw";
+ s.style.animationDuration=5+Math.random()*6+"s";
+ s.innerHTML="❄";
+ document.body.appendChild(s);
 }
 </script>
 </body>
