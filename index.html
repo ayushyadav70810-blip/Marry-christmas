@@ -3,208 +3,130 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Merry Christmas</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<title>For Chico 🎄</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:'Poppins',sans-serif}
-body{
-background:#eef7ff;
-overflow:hidden;
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{background:#eef7ff;overflow-x:hidden;}
+
+.page{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+padding:25px;
 text-align:center;
-height:100vh;
+position:relative;
 }
 
-/* Floating background PNGs */
-.bg-img{
-position:fixed;
-width:120px;
-opacity:.6;
-animation:float 8s ease-in-out infinite;
-z-index:0;
-}
-.santa{left:10px;top:20px}
-.bell{right:10px;top:150px}
-.leaf{left:50%;bottom:30px;transform:translateX(-50%)}
-
-@keyframes float{
-0%,100%{transform:translateY(0)}
-50%{transform:translateY(-20px)}
+button{
+border:none;
+padding:14px 30px;
+border-radius:30px;
+background:#5aa9ff;
+color:white;
+font-size:18px;
+margin-top:20px;
 }
 
-/* Snow */
+.float{position:fixed;opacity:.3;z-index:0;}
+.santa{bottom:10px;left:10px;width:80px;}
+.bell{top:20px;right:20px;width:70px;}
+.leaf{top:40%;left:-20px;width:90px;}
+
+.heart{font-size:90px;color:red;animation:pulse 1.3s infinite;}
+
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.25);}
+100%{transform:scale(1);}
+}
+
+.card-row{display:flex;gap:10px;margin-top:20px;}
+.card{
+width:65px;height:95px;background:#ffb6c1;
+display:flex;align-items:center;justify-content:center;
+font-size:20px;border-radius:12px;
+transition:.6s;
+}
+.card.flipped{background:#fff;transform:rotateY(180deg);}
+
 .snowflake{
 position:fixed;
-color:#cce6ff;
-font-size:12px;
-animation:fall linear infinite;
-z-index:1;
-}
-@keyframes fall{
-0%{top:-10px}
-100%{top:100vh}
+top:-10px;
+font-size:14px;
+animation:snow 10s linear infinite;
+pointer-events:none;
 }
 
-/* Pages */
-.page{
-display:none;
-position:absolute;
-inset:0;
-padding:20px;
-z-index:2;
-}
-.page.active{display:block}
-
-/* Buttons */
-.btn{
-margin-top:20px;
-padding:12px 25px;
-background:#5fa8ff;
-border:none;
-border-radius:30px;
-color:#fff;
-font-size:16px;
-cursor:pointer;
-}
-
-/* Gift */
-.gift{
-width:120px;
-margin-top:40px;
-animation:pulse 1.5s infinite;
-}
-@keyframes pulse{
-0%,100%{transform:scale(1)}
-50%{transform:scale(1.05)}
-}
-
-/* Cards */
-.cards{
-display:flex;
-justify-content:center;
-gap:10px;
-margin-top:40px;
-flex-wrap:wrap;
-}
-.card{
-width:60px;
-height:80px;
-perspective:600px;
-}
-.card-inner{
-width:100%;
-height:100%;
-transition:.6s;
-transform-style:preserve-3d;
-cursor:pointer;
-}
-.card.flip .card-inner{transform:rotateY(180deg)}
-.face{
-position:absolute;
-width:100%;
-height:100%;
-border-radius:12px;
-display:flex;
-align-items:center;
-justify-content:center;
-backface-visibility:hidden;
-background:#5fa8ff;
-color:white;
-}
-.back{
-transform:rotateY(180deg);
-background:#fff;
-color:#333;
-border:2px dashed #5fa8ff;
-}
-
-/* Photo */
-.photo{
-width:80vw;
-max-width:300px;
-border-radius:20px;
-margin:20px auto;
-display:block;
-}
+@keyframes snow{to{transform:translateY(110vh);}}
 </style>
 </head>
+
 <body>
 
-<Untitled1_20251224201443.png>
-<Untitled1_20251224201505.png>
-<Untitled1_20251224201523.png>
+<img src="santa.png" class="float santa">
+<img src="bell.png" class="float bell">
+<img src="leaf.png" class="float leaf">
 
-<div class="page active" id="p1">
-<h2>Someone special 💙</h2>
-<p style="margin-top:10px">Tap me</p>
-<button class="btn" onclick="next(2)">❤️</button>
+<div class="page" id="p1">
+<div class="heart">🩵</div>
+<p>Tap me</p>
+<button onclick="next(2)">Tap</button>
 </div>
 
-<div class="page" id="p2">
+<div class="page" id="p2" style="display:none">
 <h2>This Christmas something special for you Chico 🎄</h2>
-<img src="https://i.imgur.com/YXb3C1S.png" class="gift">
-<br>
-<button class="btn" onclick="next(3)">Open 🎁</button>
+<button onclick="next(3)">Open 🎁</button>
 </div>
 
-<div class="page" id="p3">
+<div class="page" id="p3" style="display:none">
 <h2>Just for you</h2>
-<p>I don’t need a Christmas gift</p>
+<p>I don’t need a Christmas gift 🎀</p>
 
-<div class="cards">
-<div class="card" onclick="flip(this,'Because')"><div class="card-inner">
-<div class="face">Click</div><div class="face back">Because</div></div></div>
-
-<div class="card" onclick="flip(this,'You')"><div class="card-inner">
-<div class="face">Click</div><div class="face back">You</div></div></div>
-
-<div class="card" onclick="flip(this,'Are')"><div class="card-inner">
-<div class="face">Click</div><div class="face back">Are</div></div></div>
-
-<div class="card" onclick="flip(this,'My')"><div class="card-inner">
-<div class="face">Click</div><div class="face back">My</div></div></div>
-
-<div class="card" onclick="flip(this,'Gift')"><div class="card-inner">
-<div class="face">Click</div><div class="face back">Gift</div></div></div>
+<div class="card-row">
+<div class="card" onclick="flip(this)">Because</div>
+<div class="card" onclick="flip(this)">You</div>
+<div class="card" onclick="flip(this)">Are</div>
+<div class="card" onclick="flip(this)">My</div>
+<div class="card" onclick="flip(this)">Gift 🫶🏻</div>
 </div>
 
-<button class="btn" onclick="next(4)">Next</button>
+<button onclick="next(4)">Next</button>
 </div>
 
-<div class="page" id="p4">
-<h1>Merry Christmas 🎄</h1>
-<img src="IMG_3677.jpeg" class="photo">
-<h3>to my favourite dumbest person!</h3>
-<p style="max-width:320px;margin:10px auto">
-but that’s exactly why you’re so special to me. heheh! 💙<br><br>
-Hey Chico,<br>
-Thank you for existing 🤍<br>
-I’m really glad it’s you.
+<div class="page" id="p4" style="display:none">
+<h2>Merry Christmas 🎅</h2>
+<p style="margin-top:20px">
+To my favorite person 🤍  
+<br><br>
+Hey Chico,  
+this little page is only for you ✨  
+Always remember, you’re my favorite dumb person and that’s exactly why you’re so special to me hehe 🤍
 </p>
 </div>
 
 <script>
 function next(n){
-document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-document.getElementById('p'+n).classList.add('active');
+document.querySelectorAll('.page').forEach(p=>p.style.display="none");
+document.getElementById("p"+n).style.display="flex";
+window.scrollTo(0,0);
 }
 
-function flip(card){
-card.classList.toggle('flip');
+function flip(c){
+c.classList.toggle("flipped");
 }
 
-/* Snow */
 for(let i=0;i<40;i++){
-let s=document.createElement('div');
-s.className='snowflake';
-s.innerHTML='❄';
-s.style.left=Math.random()*100+'vw';
-s.style.animationDuration=3+Math.random()*5+'s';
-s.style.fontSize=10+Math.random()*10+'px';
+let s=document.createElement("div");
+s.className="snowflake";
+s.style.left=Math.random()*100+"vw";
+s.style.animationDuration=5+Math.random()*6+"s";
+s.innerHTML="❄";
 document.body.appendChild(s);
 }
 </script>
-
 </body>
 </html>
