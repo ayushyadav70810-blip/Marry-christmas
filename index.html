@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>For Someone Special</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
@@ -16,20 +15,13 @@ text-align:center;
 color:#333;
 }
 
-.page{
-display:none;
-min-height:100vh;
-padding:60px 20px;
-}
-
+.page{display:none;min-height:100vh;padding:60px 20px;}
 .active{display:block;}
 
-h1,h2{
-font-family:'Great Vibes',cursive;
-}
+h1,h2{font-family:'Great Vibes',cursive;}
 
 button{
-background:#ff6b6b;
+background:#6fa8ff;
 border:none;
 color:white;
 padding:14px 35px;
@@ -51,10 +43,7 @@ animation:pulse 1.5s infinite;
 100%{transform:scale(1);}
 }
 
-.gift{
-font-size:110px;
-cursor:pointer;
-}
+.gift{font-size:110px;cursor:pointer;}
 
 .card-grid{
 display:grid;
@@ -65,7 +54,7 @@ margin:30px auto;
 }
 
 .flip-card{
-background:#ffe1e1;
+background:#dbe9ff;
 border-radius:20px;
 height:110px;
 display:flex;
@@ -73,6 +62,7 @@ align-items:center;
 justify-content:center;
 font-weight:bold;
 cursor:pointer;
+box-shadow:0 8px 20px rgba(0,0,0,.1);
 }
 
 .photo{
@@ -80,10 +70,53 @@ width:260px;
 border-radius:25px;
 box-shadow:0 10px 30px rgba(0,0,0,.15);
 }
+
+/* snow */
+.snowflake{
+position:fixed;
+top:-10px;
+color:#b5d8ff;
+font-size:14px;
+animation:fall linear infinite;
+opacity:0.8;
+pointer-events:none;
+z-index:5;
+}
+
+@keyframes fall{
+to{transform:translateY(110vh);}
+}
+
+/* santa & reindeer */
+.santa{
+position:fixed;
+bottom:10px;
+left:10px;
+width:90px;
+animation:float 3s ease-in-out infinite;
+z-index:6;
+}
+
+.reindeer{
+position:fixed;
+top:10px;
+right:10px;
+width:110px;
+animation:float 3s ease-in-out infinite;
+z-index:6;
+}
+
+@keyframes float{
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(-10px);}
+}
 </style>
 </head>
 
 <body>
+
+<img src="https://i.imgur.com/QjGZ8G8.png" class="santa">
+<img src="https://i.imgur.com/6QKJp5C.png" class="reindeer">
 
 <!-- PAGE 1 -->
 <div class="page active" id="p1">
@@ -132,6 +165,16 @@ I’m really glad it’s you.
 function next(n){
 document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
 document.getElementById('p'+n).classList.add('active');
+}
+
+for(let i=0;i<40;i++){
+let s=document.createElement("div");
+s.className="snowflake";
+s.innerHTML="❄";
+s.style.left=Math.random()*100+"vw";
+s.style.animationDuration=5+Math.random()*10+"s";
+s.style.fontSize=10+Math.random()*14+"px";
+document.body.appendChild(s);
 }
 </script>
 
