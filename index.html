@@ -5,140 +5,204 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Merry Christmas</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Quicksand', sans-serif;
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Poppins',sans-serif}
+body{
+background:#eef7ff;
+overflow:hidden;
+text-align:center;
+height:100vh;
 }
 
-body{
-    background:#f3f9ff;
-    text-align:center;
-    overflow-x:hidden;
+/* Floating background PNGs */
+.bg-img{
+position:fixed;
+width:120px;
+opacity:.6;
+animation:float 8s ease-in-out infinite;
+z-index:0;
+}
+.santa{left:10px;top:20px}
+.bell{right:10px;top:150px}
+.leaf{left:50%;bottom:30px;transform:translateX(-50%)}
+
+@keyframes float{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-20px)}
 }
 
 /* Snow */
-.snow{
-    position:fixed;
-    top:-10px;
-    color:#bcdfff;
-    font-size:14px;
-    animation: fall linear infinite;
+.snowflake{
+position:fixed;
+color:#cce6ff;
+font-size:12px;
+animation:fall linear infinite;
+z-index:1;
 }
-
 @keyframes fall{
-    to{ transform:translateY(110vh); }
+0%{top:-10px}
+100%{top:100vh}
 }
 
-/* Decorations */
-.decor{
-    position:fixed;
-    opacity:0.25;
+/* Pages */
+.page{
+display:none;
+position:absolute;
+inset:0;
+padding:20px;
+z-index:2;
+}
+.page.active{display:block}
+
+/* Buttons */
+.btn{
+margin-top:20px;
+padding:12px 25px;
+background:#5fa8ff;
+border:none;
+border-radius:30px;
+color:#fff;
+font-size:16px;
+cursor:pointer;
 }
 
-.santa{ left:10px; bottom:40px; width:120px; }
-.leaf{ right:20px; top:120px; width:100px; }
-.bell{ left:30px; top:200px; width:90px; }
+/* Gift */
+.gift{
+width:120px;
+margin-top:40px;
+animation:pulse 1.5s infinite;
+}
+@keyframes pulse{
+0%,100%{transform:scale(1)}
+50%{transform:scale(1.05)}
+}
 
-/* Card */
+/* Cards */
+.cards{
+display:flex;
+justify-content:center;
+gap:10px;
+margin-top:40px;
+flex-wrap:wrap;
+}
 .card{
-    margin:100px auto;
-    width:300px;
-    height:400px;
-    perspective:1000px;
+width:60px;
+height:80px;
+perspective:600px;
 }
-
 .card-inner{
-    width:100%;
-    height:100%;
-    position:relative;
-    transform-style:preserve-3d;
-    transition:0.8s;
+width:100%;
+height:100%;
+transition:.6s;
+transform-style:preserve-3d;
+cursor:pointer;
 }
-
-.card.flip .card-inner{
-    transform:rotateY(180deg);
-}
-
+.card.flip .card-inner{transform:rotateY(180deg)}
 .face{
-    position:absolute;
-    width:100%;
-    height:100%;
-    backface-visibility:hidden;
-    border-radius:25px;
-    background:white;
-    box-shadow:0 10px 30px rgba(0,0,0,0.15);
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
+position:absolute;
+width:100%;
+height:100%;
+border-radius:12px;
+display:flex;
+align-items:center;
+justify-content:center;
+backface-visibility:hidden;
+background:#5fa8ff;
+color:white;
 }
-
 .back{
-    transform:rotateY(180deg);
+transform:rotateY(180deg);
+background:#fff;
+color:#333;
+border:2px dashed #5fa8ff;
 }
 
-h1{ margin-bottom:10px; }
-.small{ font-size:14px; opacity:0.6; }
-
-img.mainpic{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    border-radius:20px;
+/* Photo */
+.photo{
+width:80vw;
+max-width:300px;
+border-radius:20px;
+margin:20px auto;
+display:block;
 }
 </style>
 </head>
-
 <body>
 
-<!-- Decorations -->
-<img src="santa.png" class="decor santa">
-<img src="leaf.png" class="decor leaf">
-<img src="bell.png" class="decor bell">
+<img src="santa.png" class="bg-img santa">
+<img src="bell.png" class="bg-img bell">
+<img src="leaf.png" class="bg-img leaf">
 
-<!-- Card -->
-<div class="card" onclick="flip(this)">
-<div class="card-inner">
-
-<div class="face front">
-    <p class="small">click to flip ✨</p>
-    <img src="https://i.imgur.com/7yUvePI.png" class="mainpic">
+<div class="page active" id="p1">
+<h2>Someone special 💙</h2>
+<p style="margin-top:10px">Tap me</p>
+<button class="btn" onclick="next(2)">❤️</button>
 </div>
 
-<div class="face back">
-    <h1>Merry Christmas 🎄</h1>
-    <p class="small">to my favorite dumbest person!</p>
-    <br>
-    <p>
-    but that’s exactly why you’re so special to me heheh!<br><br>
-    Thank you for existing 🤍<br>
-    I’m really glad it’s you.
-    </p>
+<div class="page" id="p2">
+<h2>This Christmas something special for you Chico 🎄</h2>
+<img src="https://i.imgur.com/YXb3C1S.png" class="gift">
+<br>
+<button class="btn" onclick="next(3)">Open 🎁</button>
 </div>
 
+<div class="page" id="p3">
+<h2>Just for you</h2>
+<p>I don’t need a Christmas gift</p>
+
+<div class="cards">
+<div class="card" onclick="flip(this,'Because')"><div class="card-inner">
+<div class="face">Click</div><div class="face back">Because</div></div></div>
+
+<div class="card" onclick="flip(this,'You')"><div class="card-inner">
+<div class="face">Click</div><div class="face back">You</div></div></div>
+
+<div class="card" onclick="flip(this,'Are')"><div class="card-inner">
+<div class="face">Click</div><div class="face back">Are</div></div></div>
+
+<div class="card" onclick="flip(this,'My')"><div class="card-inner">
+<div class="face">Click</div><div class="face back">My</div></div></div>
+
+<div class="card" onclick="flip(this,'Gift')"><div class="card-inner">
+<div class="face">Click</div><div class="face back">Gift</div></div></div>
 </div>
+
+<button class="btn" onclick="next(4)">Next</button>
+</div>
+
+<div class="page" id="p4">
+<h1>Merry Christmas 🎄</h1>
+<img src="IMG_3677.jpeg" class="photo">
+<h3>to my favourite dumbest person!</h3>
+<p style="max-width:320px;margin:10px auto">
+but that’s exactly why you’re so special to me. heheh! 💙<br><br>
+Hey Chico,<br>
+Thank you for existing 🤍<br>
+I’m really glad it’s you.
+</p>
 </div>
 
 <script>
-function flip(card){
-    card.classList.toggle("flip");
+function next(n){
+document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+document.getElementById('p'+n).classList.add('active');
 }
 
-// Snowflakes
+function flip(card){
+card.classList.toggle('flip');
+}
+
+/* Snow */
 for(let i=0;i<40;i++){
-    let s=document.createElement("div");
-    s.innerHTML="❄";
-    s.className="snow";
-    s.style.left=Math.random()*100+"vw";
-    s.style.animationDuration=5+Math.random()*5+"s";
-    s.style.fontSize=10+Math.random()*12+"px";
-    document.body.appendChild(s);
+let s=document.createElement('div');
+s.className='snowflake';
+s.innerHTML='❄';
+s.style.left=Math.random()*100+'vw';
+s.style.animationDuration=3+Math.random()*5+'s';
+s.style.fontSize=10+Math.random()*10+'px';
+document.body.appendChild(s);
 }
 </script>
 
